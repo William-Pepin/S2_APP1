@@ -4,7 +4,7 @@
  * Date: 17 janvier 2022 (creation)
  * Description: gestionnaire de tests pour l'application Graphicus. Ce
  *    fichier fait partie de la distribution de Graphicus.
-********/
+ ********/
 #include "tests.h"
 #include "forme.h"
 #include "cercle.h"
@@ -19,8 +19,8 @@ int main()
 {
    Tests tests;
 
-   tests.tests_unitaires();
+   // tests.tests_unitaires();
    tests.tests_application();
-   tests.validation();
+   //  tests.validation();
    return 0;
 }

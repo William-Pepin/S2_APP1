@@ -12,8 +12,8 @@ public:
     ~Carre();
     void setCote(int c);
     int getCote();
-    virtual double aire() override;
-    virtual void afficher(ostream &s) override;
-    virtual std::string toString() override;
+    virtual double aire();
+    virtual void afficher(ostream &s);
+    virtual std::string toString();
 };
 #endif

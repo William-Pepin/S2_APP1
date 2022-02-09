@@ -415,9 +415,10 @@ void vecteur_ajouter()
    vecteur.ajouter(rectangle);
    cout << "Devrait être 2, est : " << vecteur.taille() << endl;
 
+   cout << vecteur[0]->toString() << endl;
+
    cout << "Devrait être un cercle, est : ";
-   vecteur[0] = rectangle;
-   vecteur[0]->afficher(cout);
+   cout << vecteur << endl;
    cout << "Devrait être un rectangle, est : ";
    vecteur.obtenir(1)->afficher(cout);
    cout << "##### Fin de la fonction " << __func__ << " #####" << endl;
@@ -618,25 +619,25 @@ void couche_retirer()
 void couche_obtenir()
 {
    cout << "##### Test de la fonction " << __func__ << " #####" << endl;
-   Couche couche = Couche();
-   Carre carre = Carre();
-   Rectangle rectangle = Rectangle();
-   Cercle cercle = Cercle();
+   Couche *couche = new Couche();
+   Carre *carre = new Carre();
+   Rectangle *rectangle = new Rectangle();
+   Cercle *cercle = new Cercle();
 
-   couche.setEtat(1);
+   couche->setEtat('a');
 
-   couche.ajouter(&carre);
-   couche.ajouter(&rectangle);
-   couche.ajouter(&cercle);
+   couche->ajouter(carre);
+   couche->ajouter(rectangle);
+   couche->ajouter(cercle);
 
    cout << "Devrait être carré, est : ";
-   couche.obtenir(0)->afficher(cout);
+   couche->obtenir(0)->afficher(cout);
 
    cout << "Devrait être rectangle, est : ";
-   couche.obtenir(1)->afficher(cout);
+   couche->obtenir(1)->afficher(cout);
 
    cout << "Devrait être cercle, est : ";
-   couche.obtenir(2)->afficher(cout);
+   couche->obtenir(2)->afficher(cout);
 
    cout << "##### Fin de la fonction " << __func__ << " #####" << endl;
 }
@@ -946,8 +947,8 @@ void Tests::tests_unitaires_canevas()
 
 void Tests::tests_unitaires()
 {
-   tests_unitaires_formes();
-   tests_unitaires_vecteur();
+   // tests_unitaires_formes();
+   // tests_unitaires_vecteur();
    tests_unitaires_couche();
    tests_unitaires_canevas();
 }
@@ -955,46 +956,35 @@ void Tests::tests_unitaires()
 void Tests::tests_application()
 {
    tests_application_cas_01();
-   tests_application_cas_02();
+   // tests_application_cas_02();
 }
 
 void Tests::tests_application_cas_01()
 {
    cout << "TESTS APPLICATION (CAS 01)" << endl;
    Canevas canevasr = Canevas();
-   Canevas canevasc = Canevas();
-   Canevas canevasce = Canevas();
+   Couche *couche1 = new Couche();
+   Couche *couche2 = new Couche();
+   Couche *couche3 = new Couche();
+   Couche *couche4 = new Couche();
+   Couche *couche5 = new Couche();
+
+   canevasr.ajouterCouche(*couche1);
+   canevasr.ajouterCouche(*couche2);
+   canevasr.ajouterCouche(*couche3);
+   canevasr.ajouterCouche(*couche4);
+   canevasr.ajouterCouche(*couche5);
+   canevasr.activerCouche(0);
 
    Rectangle rectangle1 = Rectangle(0, 0, 4, 7);
    Rectangle rectangle2 = Rectangle(0, 0, 4, 7);
    Rectangle rectangle3 = Rectangle(0, 0, 4, 7);
-   Carre carre1 = Carre(0, 0, 6);
-   Carre carre2 = Carre(0, 0, 6);
-   Carre carre3 = Carre(0, 0, 6);
-   Cercle cercle1 = Cercle(0, 0, 2);
-   Cercle cercle2 = Cercle(0, 0, 2);
-   Cercle cercle3 = Cercle(0, 0, 2);
-
    canevasr.activerCouche(2);
    canevasr.ajouterForme(&rectangle1);
    canevasr.ajouterForme(&rectangle2);
    canevasr.ajouterForme(&rectangle3);
    canevasr.translater(200, 400);
-   canevasr.afficher(cout);
-
-   canevasc.activerCouche(3);
-   canevasc.ajouterForme(&carre1);
-   canevasc.ajouterForme(&carre2);
-   canevasc.ajouterForme(&carre2);
-   canevasc.translater(100, 820);
-   canevasc.afficher(cout);
-
-   canevasce.activerCouche(1);
-   canevasce.ajouterForme(&cercle1);
-   canevasce.ajouterForme(&cercle2);
-   canevasce.ajouterForme(&cercle3);
-   canevasce.translater(100, 820);
-   canevasce.afficher(cout);
+   cout << canevasr.toString();
 }
 
 void Tests::tests_application_cas_02()

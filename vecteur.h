@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-template <class T>
+template <typename T>
 class Vecteur
 {
 private:
@@ -24,7 +24,7 @@ public:
     T &operator[](int index);
 };
 
-template <class T>
+template <typename T>
 Vecteur<T>::Vecteur()
 {
     length = 10;
@@ -35,22 +35,21 @@ Vecteur<T>::Vecteur()
 template <class T>
 Vecteur<T>::~Vecteur()
 {
-    delete[] items;
 }
 
-template <class T>
+template <typename T>
 int Vecteur<T>::capacite()
 {
     return length;
 }
 
-template <class T>
+template <typename T>
 int Vecteur<T>::taille()
 {
     return counter;
 }
 
-template <class T>
+template <typename T>
 bool Vecteur<T>::ajouter(T item)
 {
     if (counter == length)
@@ -69,11 +68,11 @@ bool Vecteur<T>::ajouter(T item)
     return true;
 }
 
-template <class T>
+template <typename T>
 T Vecteur<T>::retirer(int index)
 {
-    if (estVide() || !estValide(index))
-        return nullptr;
+    // if (estVide() || !estValide(index))
+    // return NULL;
 
     T retour = items[index];
     for (int i = index; i < counter - 1; i++)
@@ -84,16 +83,16 @@ T Vecteur<T>::retirer(int index)
     return retour;
 }
 
-template <class T>
+template <typename T>
 T Vecteur<T>::obtenir(int index)
 {
-    if (estVide() || !estValide(index))
-        return nullptr;
+    // if (estVide() || !estValide(index))
+    //     return NULL;
 
     return items[index];
 }
 
-template <class T>
+template <typename T>
 void Vecteur<T>::vider()
 {
     delete[] items;
@@ -102,7 +101,7 @@ void Vecteur<T>::vider()
     items = new T[length];
 }
 
-template <class T>
+template <typename T>
 bool Vecteur<T>::estVide()
 {
     if (counter == 0)
@@ -110,7 +109,7 @@ bool Vecteur<T>::estVide()
     return false;
 }
 
-template <class T>
+template <typename T>
 bool Vecteur<T>::estValide(int index)
 {
     if (index < 0 || index >= counter)
@@ -120,24 +119,24 @@ bool Vecteur<T>::estValide(int index)
     return true;
 }
 
-template <class T>
+template <typename T>
 bool Vecteur<T>::operator+=(const T item) const
 {
     return ajouter(item);
 }
 
-template <class T>
+template <typename T>
 T &Vecteur<T>::operator[](int index)
 {
     return items[index];
 }
 
-template <class T>
-std::ostream &operator<<(std::ostream &output, const Vecteur<T> &v)
+template <typename T>
+std::ostream &operator<<(std::ostream &output, Vecteur<T> &v)
 {
-    for (size_t i = 0; i < v.length; i++)
+    for (size_t i = 0; i < v.taille(); i++)
     {
-        output << v.obtenir(i) << std::endl;
+        output << v[i] << std::endl;
     }
     return output;
 }

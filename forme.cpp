@@ -4,14 +4,14 @@
  * Date: 17 janvier 2022 (creation)
  * Description: Implementation des methodes des classes decrites dans
  *    forme.h. Ce fichier fait partie de la distribution de Graphicus.
-********/
+ ********/
 
 #include "forme.h"
 
 Forme::Forme(int x1, int y1)
 {
-  ancrage.x = x1;
-  ancrage.y = y1;
+   ancrage.x = x1;
+   ancrage.y = y1;
 }
 
 Forme::~Forme()

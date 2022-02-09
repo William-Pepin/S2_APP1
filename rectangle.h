@@ -15,8 +15,8 @@ public:
     void setHauteur(int h);
     int getLargeur();
     int getHauteur();
-    virtual double aire() override;
-    virtual void afficher(ostream &s) override;
-    virtual std::string toString() override;
+    virtual double aire();
+    virtual void afficher(ostream &s);
+    virtual std::string toString();
 };
 #endif

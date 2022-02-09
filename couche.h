@@ -22,7 +22,7 @@
 class Couche
 {
 private:
-   Vecteur<Forme *> *vecteur;
+   Vecteur<Forme *> vecteur;
    char etat = 'i';
 
 public:

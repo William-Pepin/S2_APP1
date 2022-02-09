@@ -12,8 +12,8 @@ public:
     ~Cercle();
     void setRayon(int r);
     int getRayon();
-    virtual double aire() override;
-    virtual void afficher(ostream &s) override;
-    virtual std::string toString() override;
+    virtual double aire();
+    virtual void afficher(ostream &s);
+    virtual std::string toString();
 };
 #endif

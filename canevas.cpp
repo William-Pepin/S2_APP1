@@ -7,22 +7,22 @@
  ********/
 
 #include "canevas.h"
+#include "vecteur.h"
+#include <sstream>
 
 Canevas::Canevas()
 {
-   couches = new Couche[MAX_COUCHES];
-   activerCouche(coucheActive);
+   couches = Vecteur<Couche>();
+   // activerCouche(coucheActive);
 }
 
 Canevas::~Canevas()
 {
-   delete[] couches;
 }
 
 bool Canevas::reinitialiser()
 {
-   delete[] couches;
-   couches = new Couche[MAX_COUCHES];
+   couches = Vecteur<Couche>();
    coucheActive = 0;
    activerCouche(coucheActive);
    return true;
@@ -41,9 +41,9 @@ bool Canevas::activerCouche(int index)
       else
       {
          // la couche n'est pas active, on désactive et on change la couche active
-         couches[coucheActive].setEtat(2); // Désactive la couche
-         couches[index].setEtat(1);        // On active la nouvelle couche
-         coucheActive = index;             // On Keep track de la couche active
+         couches[coucheActive].setEtat('x'); // Désactive la couche
+         couches[index].setEtat('a');        // On active la nouvelle couche
+         coucheActive = index;               // On Keep track de la couche active
          return true;
       }
    }
@@ -60,9 +60,21 @@ bool Canevas::cacherCouche(int index)
          // indique qu'il ne reste aucune couche active
          coucheActive = AUCUNE_COUCHE_ACTIVE;
       }
-      couches[index].setEtat(3);
+      couches[index].setEtat('c');
       return true;
    }
+   return false;
+}
+
+bool Canevas::ajouterCouche(Couche couche)
+{
+   couches.ajouter(couche);
+   return true;
+}
+
+bool Canevas::retirerCouche(int index)
+{
+   couches.retirer(index);
    return false;
 }
 
@@ -89,7 +101,7 @@ double Canevas::aire()
 {
    double aireTotale = 0;
 
-   for (int i = 0; i < MAX_COUCHES; i++)
+   for (int i = 0; i < couches.taille(); i++)
    {
       aireTotale += couches[i].aireTotale();
    }
@@ -107,7 +119,7 @@ bool Canevas::translater(int deltaX, int deltaY)
 
 void Canevas::afficher(ostream &s)
 {
-   for (int i = 0; i < MAX_COUCHES; i++)
+   for (int i = 0; i < couches.taille(); i++)
    {
       s << "----- Couche " << i << endl;
       couches[i].afficher(s);
@@ -116,7 +128,7 @@ void Canevas::afficher(ostream &s)
 
 bool Canevas::estValide(int index)
 {
-   if (index < 0 || index >= MAX_COUCHES)
+   if (index < 0 || index >= couches.taille())
    {
       return false;
    }
@@ -130,4 +142,14 @@ bool Canevas::contientActive()
       return false;
    }
    return true;
+}
+
+std::string Canevas::toString()
+{
+   ostringstream os;
+   for (int i = 0; i < couches.taille(); i++)
+   {
+      os << couches[i].toString();
+   }
+   return os.str();
 }
