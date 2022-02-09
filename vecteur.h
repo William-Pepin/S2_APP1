@@ -20,6 +20,8 @@ public:
     T obtenir(int index);
     void vider();
     bool estVide();
+    bool operator+=(const T item) const;
+    T &operator[](int index);
 };
 
 template <class T>
@@ -116,4 +118,26 @@ bool Vecteur<T>::estValide(int index)
         return false;
     }
     return true;
+}
+
+template <class T>
+bool Vecteur<T>::operator+=(const T item) const
+{
+    return ajouter(item);
+}
+
+template <class T>
+T &Vecteur<T>::operator[](int index)
+{
+    return items[index];
+}
+
+template <class T>
+std::ostream &operator<<(std::ostream &output, const Vecteur<T> &v)
+{
+    for (size_t i = 0; i < v.length; i++)
+    {
+        output << v.obtenir(i) << std::endl;
+    }
+    return output;
 }

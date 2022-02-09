@@ -4,7 +4,7 @@
  * Date: 17 janvier 2022 (creation)
  * Description: Implementation des methodes des classes decrites dans
  *    rectangle.h. Ce fichier fait partie de la distribution de Graphicus.
-********/
+ ********/
 #include "rectangle.h"
 #include <string>
 
@@ -49,3 +49,14 @@ void Rectangle::afficher(ostream &s)
 {
     s << "Rectangle(x=" << ancrage.x << " ,y=" << ancrage.y << ", largeur=" << largeur << ", hauteur=" << hauteur << ", aire=" << aire() << ")" << endl;
 };
+
+std::string Rectangle::toString()
+{
+    return "R " + to_string(ancrage.x) + " " + to_string(ancrage.y) + " " + to_string(largeur) + " " + to_string(hauteur);
+}
+
+std::ostream &operator<<(std::ostream &output, Rectangle &r)
+{
+    output << r.toString() << std::endl;
+    return output;
+}

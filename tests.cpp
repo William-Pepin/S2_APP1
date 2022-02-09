@@ -416,7 +416,8 @@ void vecteur_ajouter()
    cout << "Devrait être 2, est : " << vecteur.taille() << endl;
 
    cout << "Devrait être un cercle, est : ";
-   vecteur.obtenir(0)->afficher(cout);
+   vecteur[0] = rectangle;
+   vecteur[0]->afficher(cout);
    cout << "Devrait être un rectangle, est : ";
    vecteur.obtenir(1)->afficher(cout);
    cout << "##### Fin de la fonction " << __func__ << " #####" << endl;
@@ -590,6 +591,7 @@ void couche_ajouter()
    couche.ajouter(&carre1);
    couche.ajouter(&carre2);
    couche.ajouter(&rectangle);
+   cout << couche.toString();
    cout << "Devrait avoir Carre(x=0 ,y=0, c=1, aire=1), Carre(x=0 ,y=0, c=1, aire=1), Rectangle(x=0 ,y=0, l=1, h=1, aire=1)" << endl;
    couche.afficher(cout);
    cout << "##### Fin de la fonction " << __func__ << " #####" << endl;

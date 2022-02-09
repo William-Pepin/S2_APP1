@@ -1,6 +1,6 @@
 #Commande mere pour compiler le programme
 graphicus: graphicus-01.o canevas.o couche.o forme.o carre.o cercle.o rectangle.o tests.o 
-	g++ graphicus-01.o canevas.o couche.o forme.o carre.o cercle.o rectangle.o vecteur.o tests.o -o graphicus
+	g++ graphicus-01.o canevas.o couche.o forme.o carre.o cercle.o rectangle.o tests.o -o graphicus
 
 graphicus-01.o: graphicus-01.cpp tests.h forme.h cercle.h rectangle.h carre.h vecteur.h
 	g++ -c -g graphicus-01.cpp

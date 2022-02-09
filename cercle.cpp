@@ -4,7 +4,7 @@
  * Date: 17 janvier 2022 (creation)
  * Description: Implementation des methodes des classes decrites dans
  *    cercle.h. Ce fichier fait partie de la distribution de Graphicus.
-********/
+ ********/
 #include "cercle.h"
 #define PI 3.14159265359
 
@@ -38,3 +38,14 @@ void Cercle::afficher(ostream &s)
 {
     s << "Cercle(x=" << ancrage.x << " ,y=" << ancrage.y << ", rayon=" << rayon << ", aire=" << aire() << ")" << endl;
 };
+
+std::string Cercle::toString()
+{
+    return "C " + to_string(ancrage.x) + " " + to_string(ancrage.y) + " " + to_string(rayon);
+}
+
+std::ostream &operator<<(std::ostream &output, Cercle &c)
+{
+    output << c.toString() << std::endl;
+    return output;
+}

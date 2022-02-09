@@ -26,13 +26,13 @@ bool Couche::reinitialiser()
 {
     delete vecteur;
     vecteur = new Vecteur<Forme *>();
-    etat = 0;
+    etat = 'i';
     return true;
 }
 
 bool Couche::ajouter(Forme *forme)
 {
-    if (etat == 1)
+    if (etat == 'a')
     {
         return vecteur->ajouter(forme);
     }
@@ -41,7 +41,7 @@ bool Couche::ajouter(Forme *forme)
 
 Forme *Couche::retirer(int index)
 {
-    if (etat == 1)
+    if (etat == 'a')
     {
         return vecteur->retirer(index);
     }
@@ -70,7 +70,7 @@ double Couche::aireTotale()
 
 bool Couche::translater(int deltaX, int deltaY)
 {
-    if (etat == 1)
+    if (etat == 'a')
     {
         for (int i = 0; i < vecteur->taille(); i++)
         {
@@ -88,9 +88,9 @@ int Couche::getEtat()
     return etat;
 }
 
-bool Couche::setEtat(int etat)
+bool Couche::setEtat(char etat)
 {
-    if (etat >= 1 && etat <= 3)
+    if (etat == 'c' || etat == 'x' || etat == 'a')
     {
         this->etat = etat;
         return true;
@@ -100,11 +100,11 @@ bool Couche::setEtat(int etat)
 
 void Couche::afficher(ostream &s)
 {
-    if (etat == 3)
+    if (etat == 'c')
     {
         s << "Couche cachee" << endl;
     }
-    else if (etat == 0)
+    else if (etat == 'i')
     {
         s << "Couche initialisee" << endl;
     }
@@ -125,9 +125,13 @@ void Couche::afficher(ostream &s)
 std::string Couche::toString()
 {
     ostringstream os;
-    for (size_t i = 0; i < vecteur->taille(); i++)
-    {
-        os << vecteur[i].toString();
-    }
+
+    // i initialise
+    // a active
+    // x inactive
+    // c cache
+
+    os << "L " << etat << endl;
+    os << vecteur << endl;
     return os.str();
 }

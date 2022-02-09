@@ -14,16 +14,16 @@
 #ifndef COUCHE_H
 #define COUCHE_H
 
-// 0 initialise
-// 1 active
-// 2 inactive
-// 3 cache
+// i initialise
+// a active
+// x inactive
+// c cache
 
 class Couche
 {
 private:
    Vecteur<Forme *> *vecteur;
-   int etat = 0;
+   char etat = 'i';
 
 public:
    Couche();
@@ -35,7 +35,7 @@ public:
    double aireTotale();
    bool translater(int deltaX, int deltaY);
    int getEtat();
-   bool setEtat(int etat);
+   bool setEtat(char etat);
    void afficher(ostream &s);
    std::string toString();
 

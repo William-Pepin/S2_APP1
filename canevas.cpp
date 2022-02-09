@@ -4,7 +4,7 @@
  * Date: 17 janvier 2022
  * Description: Implementation des methodes des classes decrites dans
  *    canevas.h. Ce fichier fait partie de la distribution de Graphicus.
-********/
+ ********/
 
 #include "canevas.h"
 
@@ -30,33 +30,32 @@ bool Canevas::reinitialiser()
 
 bool Canevas::activerCouche(int index)
 {
-   if(estValide(index))
+   if (estValide(index))
    {
-      if(coucheActive == index)
+      if (coucheActive == index)
 
       {
-         // la couche est déjà active, on ne fait rien
-         couches[coucheActive].setEtat(1);
-         return true; 
+         couches[coucheActive].setEtat('a');
+         return true;
       }
       else
       {
          // la couche n'est pas active, on désactive et on change la couche active
          couches[coucheActive].setEtat(2); // Désactive la couche
-         couches[index].setEtat(1); // On active la nouvelle couche
-         coucheActive = index; // On Keep track de la couche active
+         couches[index].setEtat(1);        // On active la nouvelle couche
+         coucheActive = index;             // On Keep track de la couche active
          return true;
       }
    }
    // l'index n'est pas valide, return false
-   return false; 
+   return false;
 }
 
 bool Canevas::cacherCouche(int index)
 {
-   if(estValide(index))
+   if (estValide(index))
    {
-      if(index == coucheActive)
+      if (index == coucheActive)
       {
          // indique qu'il ne reste aucune couche active
          coucheActive = AUCUNE_COUCHE_ACTIVE;
@@ -69,17 +68,17 @@ bool Canevas::cacherCouche(int index)
 
 bool Canevas::ajouterForme(Forme *p_forme)
 {
-   if(contientActive())
+   if (contientActive())
       return couches[coucheActive].ajouter(p_forme);
    return false;
 }
 
 bool Canevas::retirerForme(int index)
 {
-   if(contientActive())
+   if (contientActive())
    {
-      Forme* forme = couches[coucheActive].retirer(index);
-      if(forme == nullptr)
+      Forme *forme = couches[coucheActive].retirer(index);
+      if (forme == nullptr)
          return false;
       return true;
    }
@@ -90,28 +89,28 @@ double Canevas::aire()
 {
    double aireTotale = 0;
 
-   for(int i= 0; i < MAX_COUCHES ; i++)
+   for (int i = 0; i < MAX_COUCHES; i++)
    {
       aireTotale += couches[i].aireTotale();
    }
-   return aireTotale; 
+   return aireTotale;
 }
 
 bool Canevas::translater(int deltaX, int deltaY)
 {
-   if(contientActive())
+   if (contientActive())
    {
-      return couches[coucheActive].translater(deltaX,deltaY); 
+      return couches[coucheActive].translater(deltaX, deltaY);
    }
-   return false; 
+   return false;
 }
 
 void Canevas::afficher(ostream &s)
 {
-   for(int i = 0; i < MAX_COUCHES; i++)
+   for (int i = 0; i < MAX_COUCHES; i++)
    {
-       s << "----- Couche " << i << endl;
-       couches[i].afficher(s);
+      s << "----- Couche " << i << endl;
+      couches[i].afficher(s);
    }
 }
 
@@ -126,9 +125,9 @@ bool Canevas::estValide(int index)
 
 bool Canevas::contientActive()
 {
-   if(coucheActive == AUCUNE_COUCHE_ACTIVE)
+   if (coucheActive == AUCUNE_COUCHE_ACTIVE)
    {
       return false;
    }
-   return true; 
+   return true;
 }
